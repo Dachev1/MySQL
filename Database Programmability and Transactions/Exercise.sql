@@ -143,19 +143,10 @@ number_of_years INT
 ) RETURNS DECIMAL(12, 4)
 READS SQL DATA
 BEGIN
-	DECLARE result DECIMAL(12, 4);
-    DECLARE I DECIMAL(12, 4);
-    DECLARE R DOUBLE(12, 2);
-    DECLARE T INT;
-
-    SET I = sum;
-    SET R = yearly_interest_rate;
-    SET T = number_of_years;
-    SET result = I * POW((1 + R), T);
-
-    RETURN result;
+    RETURN sum * POW((1 + yearly_interest_rate), number_of_years);
 END $
 
+DELIMITER ;
 SELECT ufn_calculate_future_value(1000, 0.5, 5);
 
 -- 11
